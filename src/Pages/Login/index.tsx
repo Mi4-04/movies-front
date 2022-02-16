@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router";
-import { FieldInput } from "./component/FieldInput";
+import { FieldInput } from "@app/Pages/Login/component/FieldInput";
 import { Form } from "react-final-form";
 import { FORM_ERROR } from "final-form";
 import { Button } from "@material-ui/core";
 import { Password, ButtonCome, Container, AuthBlock } from "./style";
-import { isValidUser } from "../../utils/users";
+import { isValidUser } from "@app/utils/users";
 import { useTranslation } from "react-i18next";
-import logo from "./assets/Logo.svg";
+import logo from "@app/Pages/Login/assets/Logo.svg";
 
 export const LoginPage = (props: { setIsLogged: (value: boolean) => void }) => {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ export const LoginPage = (props: { setIsLogged: (value: boolean) => void }) => {
       return { [FORM_ERROR]: t("authorization.incorrectData") };
     }
 
-    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("isLoggedIn", "1");
     localStorage.setItem("userLogin", data.login);
     props.setIsLogged(true);
     history.push("/");

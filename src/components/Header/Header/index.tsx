@@ -1,4 +1,4 @@
-import { MainHeader, MainHeaderLink, MainHeaderNav } from "./style";
+import { MainHeader } from "./style";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -16,17 +16,15 @@ export const Header = (props: {
 
   return (
     <MainHeader>
-      <MainHeaderNav>
-        {props.isLogged ? (
-          <NavLink onClick={handleLogOut} exact to="/login">
-            {t(`authorization.logout`)}
-          </NavLink>
-        ) : (
-          <NavLink exact to="/login">
-            {t(`authorization.login`)}
-          </NavLink>
-        )}
-      </MainHeaderNav>
+      {props.isLogged ? (
+        <NavLink onClick={handleLogOut} exact to="/login">
+          {t(`authorization.logout`)}
+        </NavLink>
+      ) : (
+        <NavLink exact to="/login">
+          {t(`authorization.login`)}
+        </NavLink>
+      )}
     </MainHeader>
   );
 };

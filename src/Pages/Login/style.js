@@ -5,8 +5,6 @@ export const Container = styled.div`
   ${tw`bg-gray-200  h-screen w-screen flex flex-col items-center justify-center`}
 `;
 
-
-
 export const ButtonCome = styled.div`
   padding-left: 60px;
   padding-top: 20px;
