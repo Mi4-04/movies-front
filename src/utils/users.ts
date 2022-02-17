@@ -10,7 +10,7 @@ export const FillUserStorage = (): void => {
       }
 }
 
-export const isValidUser = (login: string, password: string): string | boolean | null => {
+export const isValidUser = (login: string, password: string):  any  => {
     const usersString = localStorage.getItem("users");
     return usersString && password !== JSON.parse(usersString)[login];
   };
