@@ -1,10 +1,11 @@
-import {URL, PATH_GENRE, PATH_MOVIES} from '@app/constant'
+import {URL, PATH_GENRE, PATH_MOVIES, PATH_MOVIE_ID} from '@app/constant'
 import axios from 'axios'
 
 export interface IGenre {
   id: number;
   name: string;
-  }
+  isClick: boolean;
+}
  
 const getUrl = (path: string): string => {
     const urls = URL + path + '?api_key=' + process.env.REACT_APP_API_KEY
@@ -12,18 +13,17 @@ const getUrl = (path: string): string => {
 }
   
 export const getMoviesList = async (
-    sort_by: string,
-    voteAverage: number,
-    year:number,
     page: number ,
-    genreIds: number[],
-    language: string
+    sortBy: string,
+    year: string,
+    voteAverage: number,
+    genre_ids: number[],
 
 ): Promise<Object[]> => {
 
     const res = await axios({
         method: 'GET',
-        url: `${getUrl(PATH_MOVIES)}&language=${language}-US&sort_by=${sort_by}&include_adult=false&include_video=false&page=${page}&with_genres=${genreIds}&year=${year}&vote_average.gte=${voteAverage}`
+        url: `${getUrl(PATH_MOVIES)}&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false&page=${page}&with_genres=${genre_ids.join()}&year=${year}&vote_average.gte=${voteAverage}`
     })
     return  res.data.results 
 }
@@ -34,5 +34,23 @@ export const getGenreList = async (): Promise<IGenre[]> => {
         method: 'GET',
         url: `${getUrl(PATH_GENRE)}`
     })
-    return  res.data.results
+
+    return  res.data.genres
 }
+
+export const getMovieDetails = async (id: number): Promise<Object> => {
+
+  const url = URL + PATH_MOVIE_ID + id + '?api_key=' + process.env.REACT_APP_API_KEY
+
+  const res = await axios({
+    method: 'GET',
+    url: `${url}&language=en-US`
+  })
+
+  return res.data
+}
+
+export const isValidFilmsIdAndFilms = (): void => {
+    if (localStorage.getItem("filmsIds") === null)
+      localStorage.setItem("filmsIds", JSON.stringify([]));
+};

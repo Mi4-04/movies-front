@@ -5,6 +5,22 @@
     "logIn": "Log in",
     "incorrectData": "incorrect data",
     "emptyFiled": "Empty Filed",
-    "logout": "Log out"
-  }
+    "logout": "Log out",
+    "hello": "Hello, "
+  },
+  "genres": "Select your favorite genres",
+  "movies": "Your favorite movies",
+  "add": "Add",
+  "filter": {
+    "vote_average": "Vote average",
+    "release_date": "Release date"
+  },
+  "film": {
+    "popularity": "Popularity: ",
+    "vote_average": "Vote average: ",
+    "release_date": "Release date: ",
+    "save": "Save it"
+  },
+  "filter_header": "Choose your destiny",
+  "header_title": "My favorite cinema"
 }
