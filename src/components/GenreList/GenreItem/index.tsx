@@ -3,8 +3,8 @@ import { Container, GenreItemContainer, GenreName } from "./style";
 
 export const GenreItem = (props: {
   genre: IGenre;
-  handleClicked: (index: number) => void;
   index: number;
+  handleClicked: (index: number) => void;
 }) => {
   return (
     <Container>

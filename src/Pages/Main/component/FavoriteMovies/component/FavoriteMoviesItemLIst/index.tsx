@@ -16,9 +16,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 export const FavoriteMoviesItemList = (props: {
   film: any;
+  index: number;
   handleWatched: (index: number) => void;
   deleteFilm: (id: number) => void;
-  index: number;
 }) => {
   const { t } = useTranslation();
 

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 export const Header = (props: {
   isLogged: boolean;
-  setIsLogged: (value: any) => void;
   userLogin: string;
+  setIsLogged: (value: any) => void;
 }) => {
   const { t } = useTranslation();
 
@@ -24,7 +24,6 @@ export const Header = (props: {
       {props.isLogged ? (
         <div>
           <TextHeader>
-            {" "}
             {t(`authorization.hello`)} {props.userLogin} &nbsp;
             <NavLink onClick={handleLogOut} exact to="/login">
               {t(`authorization.logout`)}

@@ -10,5 +10,5 @@ export const HeaderMovies = styled.h1`
 `;
 
 export const ButtonLayout = styled.div`
-  ${tw`ml-2`}
+  ${tw`ml-2 `}
 `;

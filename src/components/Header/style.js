@@ -9,8 +9,8 @@ export const MainHeader = styled.header`
 export const TextHeader = styled.p`
   display: flex;
   align-items: center;
-  justify-content: right;
   text-align: center;
+  justify-content: right;
 `;
 
 export const Title = styled.h1`

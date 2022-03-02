@@ -12,9 +12,9 @@ import { MovieLayout } from "./style";
 
 export const FavoriteMoviesItemBlock = (props: {
   film: any;
-  handleWatched: (index: number) => void;
-  deleteFilm: (id: number) => void;
   index: number;
+  deleteFilm: (id: number) => void;
+  handleWatched: (index: number) => void;
 }) => {
   const { t } = useTranslation();
 

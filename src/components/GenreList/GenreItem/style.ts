@@ -6,7 +6,7 @@ interface IItemProps{
 }
 
 export const GenreItemContainer = styled.div<IItemProps>(props => [
-    tw` inline-block rounded border border-solid  m-1 self-center  `,
+    tw` inline-block rounded border border-solid  m-1 self-center`,
     props.isChecked && tw`border-green-800 bg-green-800 text-white`
 ])
 
@@ -16,5 +16,5 @@ ${tw `text-center  pl-2 pr-2`}
 
 export const Container = styled.div`
 
-${tw` flex items-center inline-block  pl-3 `}
+${tw` flex items-center inline-block  pl-3`}
 `

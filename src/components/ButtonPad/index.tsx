@@ -1,4 +1,3 @@
-import React from "react";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
@@ -17,8 +16,8 @@ export const ButtonPad = (props: { setView: (value: boolean) => void }) => {
     <div>
       <Stack
         direction="row"
-        justifyContent="flex-end"
         alignItems="flex-start"
+        justifyContent="flex-end"
         spacing={2}
       >
         <IconButton size="large" onClick={() => handleViewBlock()}>

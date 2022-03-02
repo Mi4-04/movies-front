@@ -5,11 +5,9 @@ import { ContainerList } from "./style";
 
 export const GenreList = (props: {
   genres: IGenre[];
-  setGenres: (value: any) => void;
+  setGenres: (value: IGenre[]) => void;
 }) => {
   const [genresId, setGenresId] = React.useState<number[]>([]);
-
-  console.log("123", genresId);
 
   React.useEffect(() => {
     setGenresId(

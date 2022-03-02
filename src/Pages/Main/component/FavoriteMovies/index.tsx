@@ -12,6 +12,7 @@ export const FavoriteMovies = (props: { view: boolean }) => {
 
   React.useEffect(() => {
     setMovies([]);
+
     filmsIds.map((id) => {
       getMovieDetails(id).then((res) => {
         setMovies((prev) => prev.concat({ ...res, ...{ watched: false } }));
@@ -25,13 +26,13 @@ export const FavoriteMovies = (props: { view: boolean }) => {
     setFilmsIds(newFilmsIds);
   }, [movies]);
 
+  const deleteFilm = (id: number) => {
+    setMovies(movies.filter((film) => film.id !== id));
+  };
+
   const handleWatched = (index: number) => {
     movies[index].watched = !movies[index].watched;
     setMovies([...movies]);
-  };
-
-  const deleteFilm = (id: number) => {
-    setMovies(movies.filter((film) => film.id !== id));
   };
 
   return (

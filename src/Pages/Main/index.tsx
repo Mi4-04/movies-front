@@ -10,7 +10,7 @@ import { ButtonPad } from "@app/components/ButtonPad";
 
 export const Main = (props: {
   genres: IGenre[];
-  setGenres: (value: any) => void;
+  setGenres: (value: IGenre[]) => void;
   view: boolean;
   setView: (value: boolean) => void;
 }) => {
