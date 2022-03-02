@@ -5,14 +5,23 @@ import { Popularity } from "@app/Pages/AddPage/component/Filtration/component/Po
 import { YearSelect } from "@app/Pages/AddPage/component/Filtration/component/YearSelect";
 import { GenreList } from "@app/components/GenreList";
 
-export const Filtration = (props: {
+interface IFriltrationProps {
   genres: IGenre[];
   year: string;
   setYear: (value: string) => void;
   voteAverage: number;
   setVoteAverage: (value: number) => void;
   setGenres: (value: IGenre[]) => void;
-}) => {
+}
+
+export const Filtration = ( {
+  genres,
+  year,
+  setYear,
+  voteAverage,
+  setVoteAverage,
+  setGenres
+}: IFriltrationProps) => {
   return (
     <Box
       sx={{
@@ -28,15 +37,15 @@ export const Filtration = (props: {
       <Box sx={{ my: 3, mx: 6 }}>
         <Grid container alignItems="center">
           <Grid item>
-            <GenreList genres={props.genres} setGenres={props.setGenres} />
+            <GenreList genres={genres} setGenres={setGenres} />
           </Grid>
           <Grid item>
-            <YearSelect year={props.year} setYear={props.setYear} />
+            <YearSelect year={year} setYear={setYear} />
           </Grid>
           <Grid item>
             <Popularity
-              voteAverage={props.voteAverage}
-              setVoteAverage={props.setVoteAverage}
+              voteAverage={voteAverage}
+              setVoteAverage={setVoteAverage}
             />
           </Grid>
         </Grid>

@@ -3,14 +3,19 @@ import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
 
-export const Popularity = (props: {
+interface IPopularityProps {
   voteAverage: number;
   setVoteAverage: (value: number) => void;
-}) => {
+}
+
+export const Popularity = ({
+  voteAverage,
+  setVoteAverage,
+}: IPopularityProps) => {
   const { t } = useTranslation();
 
   const handleChange = (e: any) => {
-    props.setVoteAverage(e.target.value);
+    setVoteAverage(e.target.value);
   };
 
   return (
@@ -22,7 +27,7 @@ export const Popularity = (props: {
         min={0}
         max={10}
         step={0.1}
-        value={props.voteAverage}
+        value={voteAverage}
         onChange={handleChange}
         aria-labelledby="input-slider"
         valueLabelDisplay="auto"

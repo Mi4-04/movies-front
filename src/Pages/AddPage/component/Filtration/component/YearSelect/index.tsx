@@ -6,10 +6,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useTranslation } from "react-i18next";
 
-export const YearSelect = (props: {
+interface IYearSelectProps {
   year: string;
   setYear: (value: any) => void;
-}) => {
+}
+
+export const YearSelect = ({ year, setYear }: IYearSelectProps) => {
   const { t } = useTranslation();
   const [date, setDate] = React.useState<number[]>([]);
 
@@ -21,7 +23,7 @@ export const YearSelect = (props: {
   }, []);
 
   const handleChange = (e: any) => {
-    props.setYear(e.target.value);
+    setYear(e.target.value);
   };
 
   return (
@@ -34,7 +36,7 @@ export const YearSelect = (props: {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label={t(`filter.release_date`)}
-          value={props.year}
+          value={year}
           onChange={handleChange}
         >
           {date?.map((dateYear) => {
