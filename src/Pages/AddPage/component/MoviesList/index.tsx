@@ -12,11 +12,9 @@ export const MoviesList = (props: {
   view: boolean;
 }) => {
   const [movies, setMovies] = React.useState<any[]>([]);
-
   const [filmsIds, setFilmsIds] = React.useState<number[]>(
     JSON.parse(localStorage["filmsIds"])
   );
-
   const [genresId, setGenresId] = React.useState<number[]>([]);
 
   React.useEffect(() => {

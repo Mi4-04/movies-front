@@ -1,5 +1,5 @@
-import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
 
@@ -18,11 +18,12 @@ export const Popularity = (props: {
       <Typography id="input-slider" gutterBottom>
         {t(`filter.vote_average`)}
       </Typography>
+
       <Slider
+        value={props.voteAverage}
         min={0}
         max={10}
         step={0.1}
-        value={props.voteAverage}
         onChange={handleChange}
         aria-labelledby="input-slider"
         valueLabelDisplay="auto"

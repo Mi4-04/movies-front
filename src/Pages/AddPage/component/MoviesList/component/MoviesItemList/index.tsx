@@ -8,9 +8,9 @@ import {
   ReleaseDate,
   TitleLayout,
 } from "./style";
-import { URL_POST } from "@app/constant";
-import { useTranslation } from "react-i18next";
 import Button from "@mui/material/Button";
+import { useTranslation } from "react-i18next";
+import { URL_POST } from "@app/constant";
 
 export const MoviesItemList = (props: {
   film: any;

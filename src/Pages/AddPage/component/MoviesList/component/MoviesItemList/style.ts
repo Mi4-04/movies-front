@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import tw from 'twin.macro'
 
 export const MovieLayout = styled.div`
-   ${tw`flex flex-col items-start p-2 bg-white border-2 border-gray-200 rounded-lg shadow-sm min-w-min`}
+   ${tw`flex flex-col items-start p-2 bg-white border-2 border-gray-200 rounded-lg shadow-sm min-w-min `}
 `;
 
 export const MovieImg = styled.img`
-  ${tw`w-44 rounded-md border-2 border-gray-300 `}
+  ${tw`w-44 rounded-md border-2 border-gray-300`}
 `;
 
 export const DescriptionLayout = styled.div`
@@ -22,7 +22,7 @@ export const MovieTitle = styled.h2`
 `;
 
 export const MoviePopularity = styled.p`
-  ${tw`text-gray-800 mt-2 ml-2 overflow-clip`}
+  ${tw`text-gray-800 mt-2 ml-2 overflow-clip `}
 `;
 
 export const ReleaseDate = styled.p`

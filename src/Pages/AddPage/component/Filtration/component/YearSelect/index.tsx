@@ -11,6 +11,7 @@ export const YearSelect = (props: {
   setYear: (value: any) => void;
 }) => {
   const { t } = useTranslation();
+
   const [date, setDate] = React.useState<number[]>([]);
 
   React.useEffect(() => {

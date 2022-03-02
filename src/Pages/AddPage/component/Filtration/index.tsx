@@ -8,8 +8,8 @@ import { GenreList } from "@app/components/GenreList";
 export const Filtration = (props: {
   genres: IGenre[];
   year: string;
-  setYear: (value: string) => void;
   voteAverage: number;
+  setYear: (value: string) => void;
   setVoteAverage: (value: number) => void;
   setGenres: (value: IGenre[]) => void;
 }) => {
