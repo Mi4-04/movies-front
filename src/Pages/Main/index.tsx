@@ -8,20 +8,27 @@ import { IGenre } from "@app/utils/movies";
 import { FavoriteMovies } from "@app/Pages/Main/component/FavoriteMovies";
 import { ButtonPad } from "@app/components/ButtonPad";
 
-export const Main = (props: {
+interface IMainProps {
   genres: IGenre[];
   setGenres: (value: any) => void;
-  view: boolean;
-  setView: (value: boolean) => void;
-}) => {
+  blockAndListview: boolean;
+  setBlockAndListview: (value: boolean) => void;
+}
+
+export const Main = ({
+  genres,
+  setGenres,
+  blockAndListview,
+  setBlockAndListview,
+}: IMainProps) => {
   const { t } = useTranslation();
 
   return (
     <div>
       <HeaderGenres>{t(`genres`)}</HeaderGenres>
-      <GenreList genres={props.genres} setGenres={props.setGenres} />
+      <GenreList genres={genres} setGenres={setGenres} />
       <HeaderMovies>{t(`movies`)}</HeaderMovies>
-      <ButtonPad setView={props.setView} />
+      <ButtonPad setBlockAndListview={setBlockAndListview} />
 
       <ButtonLayout>
         <Link to="/add">
@@ -30,7 +37,7 @@ export const Main = (props: {
           </Button>
         </Link>
       </ButtonLayout>
-      <FavoriteMovies view={props.view} />
+      <FavoriteMovies blockAndListview={blockAndListview} />
     </div>
   );
 };

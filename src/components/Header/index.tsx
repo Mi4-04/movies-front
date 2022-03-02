@@ -3,17 +3,19 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-export const Header = (props: {
+interface IHeaderProp {
   isLogged: boolean;
   setIsLogged: (value: any) => void;
   userLogin: string;
-}) => {
+}
+
+export const Header = ({ isLogged, setIsLogged, userLogin }: IHeaderProp) => {
   const { t } = useTranslation();
 
   const handleLogOut = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userLogin");
-    props.setIsLogged(false);
+    setIsLogged(false);
   };
 
   return (
@@ -21,11 +23,11 @@ export const Header = (props: {
       <Link to="/">
         <Title>{t(`header_title`)}</Title>
       </Link>
-      {props.isLogged ? (
+      {isLogged ? (
         <div>
           <TextHeader>
             {" "}
-            {t(`authorization.hello`)} {props.userLogin} &nbsp;
+            {t(`authorization.hello`)} {userLogin} &nbsp;
             <NavLink onClick={handleLogOut} exact to="/login">
               {t(`authorization.logout`)}
             </NavLink>

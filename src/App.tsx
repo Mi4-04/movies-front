@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { Header } from "@app/components/Header";
 import { LoginPage } from "@app/Pages/Login";
@@ -16,14 +16,31 @@ const App = () => {
 
   isValidFilmsIdAndFilms();
 
-  const [userLogin, setUserLogin] = useState(localStorage.getItem("userLogin"));
-  const [isLogged, setIsLogged] = useState(
+  const [userLogin, setUserLogin] = React.useState(
+    localStorage.getItem("userLogin")
+  );
+  const [isLogged, setIsLogged] = React.useState(
     localStorage.getItem("isLoggedIn") === "1"
   );
 
   const [genres, setGenres] = React.useState<IGenre[]>([]);
 
-  const [view, setView] = React.useState<boolean>(false);
+  const [blockAndListview, setBlockAndListview] =
+    React.useState<boolean>(false);
+
+  const [genresId, setGenresId] = React.useState<number[]>([]);
+
+  React.useEffect(() => {
+    setGenresId(
+      genres
+        .filter((w, index) => {
+          return genres[index].isClick;
+        })
+        .map((genre) => {
+          return genre.id;
+        })
+    );
+  }, [genres]);
 
   React.useEffect(() => {
     getGenreList().then((results) => {
@@ -36,6 +53,8 @@ const App = () => {
       );
     });
   }, []);
+
+  localStorage.setItem("genres", JSON.stringify(genres));
 
   return (
     <BrowserRouter>
@@ -54,8 +73,8 @@ const App = () => {
               <Main
                 genres={genres}
                 setGenres={setGenres}
-                view={view}
-                setView={setView}
+                blockAndListview={blockAndListview}
+                setBlockAndListview={setBlockAndListview}
               />
             )}
           </Route>
@@ -69,8 +88,9 @@ const App = () => {
               <AddPage
                 genres={genres}
                 setGenres={setGenres}
-                view={view}
-                setView={setView}
+                blockAndListview={blockAndListview}
+                setBlockAndListview={setBlockAndListview}
+                genresId={genresId}
               />
             )}
           </Route>

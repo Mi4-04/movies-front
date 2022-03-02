@@ -7,12 +7,21 @@ import { MoviesList } from "./component/MoviesList";
 import { useTranslation } from "react-i18next";
 import { ButtonPad } from "@app/components/ButtonPad";
 
-export const AddPage = (props: {
+interface IAddPageProps {
   genres: IGenre[];
   setGenres: (value: any) => void;
-  view: boolean;
-  setView: (value: boolean) => void;
-}) => {
+  blockAndListview: boolean;
+  setBlockAndListview: (value: boolean) => void;
+  genresId: number[];
+}
+
+export const AddPage = ({
+  genres,
+  setGenres,
+  blockAndListview,
+  setBlockAndListview,
+  genresId,
+}: IAddPageProps) => {
   const { t } = useTranslation();
   const [year, setYear] = React.useState<string>(DEFAULT_YEAR);
   const [voteAverage, setVoteAverage] =
@@ -23,21 +32,22 @@ export const AddPage = (props: {
       <FilterLayout>
         <h1> {t(`filter_header`)}</h1>
         <Filtration
-          genres={props.genres}
+          genres={genres}
           year={year}
           setYear={setYear}
           voteAverage={voteAverage}
           setVoteAverage={setVoteAverage}
-          setGenres={props.setGenres}
+          setGenres={setGenres}
         />
-        <ButtonPad setView={props.setView} />
+        <ButtonPad setBlockAndListview={setBlockAndListview} />
       </FilterLayout>
 
       <MoviesList
-        genres={props.genres}
+        genres={genres}
         year={year}
         voteAverage={voteAverage}
-        view={props.view}
+        blockAndListview={blockAndListview}
+        genresId={genresId}
       />
     </div>
   );

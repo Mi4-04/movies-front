@@ -51,6 +51,5 @@ export const getMovieDetails = async (id: number): Promise<Object> => {
 }
 
 export const isValidFilmsIdAndFilms = (): void => {
-    if (localStorage.getItem("filmsIds") === null)
-      localStorage.setItem("filmsIds", JSON.stringify([]));
+    !localStorage.getItem("filmsIds") && localStorage.setItem("filmsIds", JSON.stringify([]));
 };

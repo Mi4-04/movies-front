@@ -8,11 +8,17 @@ import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
 import { MovieLayout } from "./style";
 
-export const MoviesItemBlock = (props: {
+interface IMoviesItemBlock {
   film: any;
   filmsIds: number[];
   saveFilm: (id: number) => void;
-}) => {
+}
+
+export const MoviesItemBlock = ({
+  film,
+  filmsIds,
+  saveFilm,
+}: IMoviesItemBlock) => {
   const { t } = useTranslation();
 
   return (
@@ -20,30 +26,28 @@ export const MoviesItemBlock = (props: {
       <Card sx={{ mt: 4, maxWidth: 250 }}>
         <CardMedia
           component="img"
-          image={`${URL_POST}${props.film.poster_path}`}
-          alt={`${props.film.title}`}
+          image={`${URL_POST}${film.poster_path}`}
+          alt={`${film.title}`}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {props.film.title}
+            {film.title}
           </Typography>
           <Typography variant="body1">
-            {t(`film.popularity`)} {props.film.popularity}
+            {t(`film.popularity`)} {film.popularity}
           </Typography>
           <Typography variant="body1">
             {t(`film.vote_average`)}
-            {props.film.vote_average}
+            {film.vote_average}
           </Typography>
           <Typography variant="body1">
-            {t(`film.release_date`)} {props.film.release_date}
+            {t(`film.release_date`)} {film.release_date}
           </Typography>
         </CardContent>
         <CardActions>
           <Button
-            color={
-              props.filmsIds.includes(props.film.id) ? "success" : "primary"
-            }
-            onClick={() => props.saveFilm(props.film.id)}
+            color={filmsIds.includes(film.id) ? "success" : "primary"}
+            onClick={() => saveFilm(film.id)}
             size="small"
           >
             {t(`film.save`)}

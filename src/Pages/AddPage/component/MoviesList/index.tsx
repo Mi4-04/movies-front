@@ -9,7 +9,8 @@ export const MoviesList = (props: {
   genres: IGenre[];
   year: string;
   voteAverage: number;
-  view: boolean;
+  blockAndListview: boolean;
+  genresId: number[];
 }) => {
   const [movies, setMovies] = React.useState<any[]>([]);
 
@@ -17,31 +18,17 @@ export const MoviesList = (props: {
     JSON.parse(localStorage["filmsIds"])
   );
 
-  const [genresId, setGenresId] = React.useState<number[]>([]);
-
-  React.useEffect(() => {
-    setGenresId(
-      props.genres
-        .filter((w, index) => {
-          return props.genres[index].isClick;
-        })
-        .map((genre) => {
-          return genre.id;
-        })
-    );
-  }, [props.genres]);
-
   React.useEffect(() => {
     getMoviesList(
       DEFAULT_PAGE,
       DEFAULT_SORT_BY,
       props.year,
       props.voteAverage,
-      genresId
+      props.genresId
     ).then((res) => {
       setMovies(res);
     });
-  }, [props.year, props.voteAverage, genresId]);
+  }, [props.year, props.voteAverage, props.genresId]);
 
   const saveFilm = (id: number): void => {
     let newfilmsIds = [...filmsIds, id];
@@ -50,9 +37,9 @@ export const MoviesList = (props: {
   };
 
   return (
-    <MoviesLayout view={props.view}>
+    <MoviesLayout blockAndListview={props.blockAndListview}>
       {movies?.map((film, index) => {
-        return props.view ? (
+        return props.blockAndListview ? (
           <MoviesItemBlock
             key={index}
             film={film}

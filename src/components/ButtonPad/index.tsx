@@ -4,13 +4,15 @@ import Stack from "@mui/material/Stack";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
 
-export const ButtonPad = (props: { setView: (value: boolean) => void }) => {
+export const ButtonPad = (props: {
+  setBlockAndListview: (value: boolean) => void;
+}) => {
   const handleViewBlock = () => {
-    props.setView(true);
+    props.setBlockAndListview(true);
   };
 
   const handleViewList = () => {
-    props.setView(false);
+    props.setBlockAndListview(false);
   };
 
   return (

@@ -1,17 +1,17 @@
 import { IGenre } from "@app/utils/movies";
 import { Container, GenreItemContainer, GenreName } from "./style";
 
-export const GenreItem = (props: {
+interface IGenreItem {
   genre: IGenre;
   handleClicked: (index: number) => void;
   index: number;
-}) => {
+}
+
+export const GenreItem = ({ genre, handleClicked, index }: IGenreItem) => {
   return (
     <Container>
-      <GenreItemContainer isChecked={props.genre.isClick}>
-        <GenreName onClick={() => props.handleClicked(props.index)}>
-          {props.genre.name}
-        </GenreName>
+      <GenreItemContainer isChecked={genre.isClick}>
+        <GenreName onClick={() => handleClicked(index)}>{genre.name}</GenreName>
       </GenreItemContainer>
     </Container>
   );

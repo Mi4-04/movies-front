@@ -12,32 +12,38 @@ import { URL_POST } from "@app/constant";
 import { useTranslation } from "react-i18next";
 import Button from "@mui/material/Button";
 
-export const MoviesItemList = (props: {
+interface IMoviesItemList {
   film: any;
   filmsIds: number[];
   saveFilm: (id: number) => void;
-}) => {
+}
+
+export const MoviesItemList = ({
+  film,
+  filmsIds,
+  saveFilm,
+}: IMoviesItemList) => {
   const { t } = useTranslation();
 
   return (
     <MovieLayout>
-      <MovieImg src={`${URL_POST}${props.film.poster_path}`} />
+      <MovieImg src={`${URL_POST}${film.poster_path}`} />
       <DescriptionLayout>
         <TitleLayout>
-          <MovieTitle>{props.film.title}</MovieTitle>
+          <MovieTitle>{film.title}</MovieTitle>
         </TitleLayout>
         <MoviePopularity>
-          {t(`film.popularity`)} {props.film.popularity}
+          {t(`film.popularity`)} {film.popularity}
         </MoviePopularity>
         <ReleaseDate>
-          {t(`film.release_date`)} {props.film.release_date}
+          {t(`film.release_date`)} {film.release_date}
         </ReleaseDate>
       </DescriptionLayout>
 
       <ButtonPadLayout>
         <Button
-          color={props.filmsIds.includes(props.film.id) ? "success" : "primary"}
-          onClick={() => props.saveFilm(props.film.id)}
+          color={filmsIds.includes(film.id) ? "success" : "primary"}
+          onClick={() => saveFilm(film.id)}
           size="small"
         >
           {t(`film.save`)}
