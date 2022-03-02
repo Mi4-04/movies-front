@@ -1,4 +1,3 @@
-import React from "react";
 import { useHistory } from "react-router";
 import { FieldInput } from "@app/Pages/Login/component/FieldInput";
 import { Form } from "react-final-form";
@@ -9,7 +8,10 @@ import { isValidUser } from "@app/utils/users";
 import { useTranslation } from "react-i18next";
 import logo from "@app/Pages/Login/assets/Logo.svg";
 
-export const LoginPage = (props: { setIsLogged: (value: boolean) => void }) => {
+export const LoginPage = (props: {
+  setIsLogged: (value: boolean) => void;
+  setUserLogin: (value: string) => void;
+}) => {
   const { t } = useTranslation();
   const history = useHistory();
   const required = (value: string): string => {
@@ -24,6 +26,7 @@ export const LoginPage = (props: { setIsLogged: (value: boolean) => void }) => {
     localStorage.setItem("isLoggedIn", "1");
     localStorage.setItem("userLogin", data.login);
     props.setIsLogged(true);
+    props.setUserLogin(data.login);
     history.push("/");
   };
 
