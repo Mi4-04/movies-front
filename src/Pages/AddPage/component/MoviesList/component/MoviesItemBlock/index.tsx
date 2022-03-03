@@ -8,24 +8,10 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
 import { MovieLayout } from "./style";
-import { IMovies } from "@app/utils/movies";
+import { IMovieItem } from "@app/types";
 
-interface IMoviesItemBlock {
-  film: IMovies;
-}
-
-export const MoviesItemBlock = ({ film }: IMoviesItemBlock) => {
+export const MoviesItemBlock = ({ film, filmsIds, saveFilm }: IMovieItem) => {
   const { t } = useTranslation();
-
-  const [filmsIds, setFilmsIds] = React.useState<number[]>(
-    JSON.parse(localStorage["filmsIds"])
-  );
-
-  const saveFilm = (id: number): void => {
-    let newfilmsIds = [...filmsIds, id];
-    setFilmsIds(newfilmsIds);
-    localStorage.setItem("filmsIds", JSON.stringify(newfilmsIds));
-  };
 
   return (
     <MovieLayout>

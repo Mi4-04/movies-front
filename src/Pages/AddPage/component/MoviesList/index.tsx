@@ -20,6 +20,16 @@ export const MoviesList = ({
 }: IMoviesList) => {
   const [movies, setMovies] = React.useState<IMovies[]>([]);
 
+  const [filmsIds, setFilmsIds] = React.useState<number[]>(
+    JSON.parse(localStorage["filmsIds"])
+  );
+
+  const saveFilm = (id: number): void => {
+    const newfilmsIds = [...filmsIds, id];
+    setFilmsIds(newfilmsIds);
+    localStorage.setItem("filmsIds", JSON.stringify(newfilmsIds));
+  };
+
   React.useEffect(() => {
     getMoviesList(
       DEFAULT_PAGE,
@@ -36,9 +46,9 @@ export const MoviesList = ({
     <MoviesLayout blockView={blockView}>
       {movies?.map((film, index) => {
         return blockView ? (
-          <MoviesItemBlock key={index} film={film} />
+          <MoviesItemBlock key={index} film={film}  filmsIds = {filmsIds} saveFilm = {saveFilm} />
         ) : (
-          <MoviesItemList key={index} film={film} />
+          <MoviesItemList key={index} film={film} filmsIds = {filmsIds} saveFilm = {saveFilm} />
         );
       })}
     </MoviesLayout>

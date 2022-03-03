@@ -12,24 +12,10 @@ import {
 import { URL_POST } from "@app/constant";
 import { useTranslation } from "react-i18next";
 import Button from "@mui/material/Button";
-import { IMovies } from "@app/utils/movies";
+import { IMovieItem } from "@app/types";
 
-interface IMoviesItemList {
-  film: IMovies;
-}
-
-export const MoviesItemList = ({ film }: IMoviesItemList) => {
+export const MoviesItemList = ({ film, filmsIds, saveFilm }: IMovieItem) => {
   const { t } = useTranslation();
-
-  const [filmsIds, setFilmsIds] = React.useState<number[]>(
-    JSON.parse(localStorage["filmsIds"])
-  );
-
-  const saveFilm = (id: number): void => {
-    let newfilmsIds = [...filmsIds, id];
-    setFilmsIds(newfilmsIds);
-    localStorage.setItem("filmsIds", JSON.stringify(newfilmsIds));
-  };
 
   return (
     <MovieLayout>
