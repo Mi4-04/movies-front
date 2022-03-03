@@ -1,12 +1,11 @@
 import React from "react";
-import { getMoviesList, IGenre } from "@app/utils/movies";
+import { getMoviesList, IGenre, IMovies } from "@app/utils/movies";
 import { DEFAULT_PAGE, DEFAULT_SORT_BY } from "@app/constant";
 import { MoviesItemBlock } from "./component/MoviesItemBlock";
 import { MoviesLayout } from "./style";
 import { MoviesItemList } from "./component/MoviesItemList";
 
 interface IMoviesList {
-  genres: IGenre[];
   year: string;
   voteAverage: number;
   blockView: boolean;
@@ -14,13 +13,12 @@ interface IMoviesList {
 }
 
 export const MoviesList = ({
-  genres,
   year,
   voteAverage,
   blockView,
   genresId,
 }: IMoviesList) => {
-  const [movies, setMovies] = React.useState<any[]>([]);
+  const [movies, setMovies] = React.useState<IMovies[]>([]);
 
   React.useEffect(() => {
     getMoviesList(

@@ -43,7 +43,7 @@ export const AddPage = ({
       </FilterLayout>
 
       <MoviesList
-        genres={genres}
+       
         year={year}
         voteAverage={voteAverage}
         blockView={blockView}

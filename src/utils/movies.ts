@@ -36,7 +36,7 @@ export const getMoviesList = async (
     voteAverage: number,
     genre_ids: number[],
 
-): Promise<Object[]> => {
+): Promise<IMovies[]> => {
 
     const res = await axios({
         method: 'GET',
