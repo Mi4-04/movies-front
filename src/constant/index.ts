@@ -8,3 +8,6 @@ export const DEFAULT_VOTE_AVARAGE = 5
 export const DEFAULT_YEAR = '2022'
 export const DEFAULT_GENRES = 'Action'
 export const  URL_POST = 'https://image.tmdb.org/t/p/w200'
+export const MIN_VALUE_SLIDER = 0
+export const MAX_VALUE_SLIDER = 10
+export const STEP_VALUE_SLIDER = 0.1

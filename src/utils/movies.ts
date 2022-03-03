@@ -6,6 +6,23 @@ export interface IGenre {
   name: string;
   isClick: boolean;
 }
+
+export interface IMovies {
+    adulit: boolean;
+    backdrop_path: string | null;
+    genre_ids: number[];
+    id: number;
+    original_language: string;
+    original_title: string;
+    overview: string;
+    popularity: number;
+    poster_path: string | null;
+    release_date: string;
+    title: string;
+    video: boolean;
+    vote_average: number;
+    watched: boolean;
+}
  
 const getUrl = (path: string): string => {
     const urls = URL + path + '?api_key=' + process.env.REACT_APP_API_KEY
@@ -38,7 +55,7 @@ export const getGenreList = async (): Promise<IGenre[]> => {
     return  res.data.genres
 }
 
-export const getMovieDetails = async (id: number): Promise<Object> => {
+export const getMovieDetails = async (id: number): Promise<IMovies> => {
 
   const url = URL + PATH_MOVIE_ID + id + '?api_key=' + process.env.REACT_APP_API_KEY
 

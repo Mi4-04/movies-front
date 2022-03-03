@@ -9,7 +9,7 @@ import { ButtonPad } from "@app/components/ButtonPad";
 
 interface IAddPageProps {
   genres: IGenre[];
-  setGenres: (value: any) => void;
+  setGenres: (value: IGenre[]) => void;
   blockView: boolean;
   setBlockView: (value: boolean) => void;
   genresId: number[];

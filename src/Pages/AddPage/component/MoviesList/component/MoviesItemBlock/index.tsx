@@ -1,3 +1,4 @@
+import React from "react";
 import { URL_POST } from "@app/constant";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -7,19 +8,24 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
 import { MovieLayout } from "./style";
+import { IMovies } from "@app/utils/movies";
 
 interface IMoviesItemBlock {
-  film: any;
-  filmsIds: number[];
-  saveFilm: (id: number) => void;
+  film: IMovies;
 }
 
-export const MoviesItemBlock = ({
-  film,
-  filmsIds,
-  saveFilm,
-}: IMoviesItemBlock) => {
+export const MoviesItemBlock = ({ film }: IMoviesItemBlock) => {
   const { t } = useTranslation();
+
+  const [filmsIds, setFilmsIds] = React.useState<number[]>(
+    JSON.parse(localStorage["filmsIds"])
+  );
+
+  const saveFilm = (id: number): void => {
+    let newfilmsIds = [...filmsIds, id];
+    setFilmsIds(newfilmsIds);
+    localStorage.setItem("filmsIds", JSON.stringify(newfilmsIds));
+  };
 
   return (
     <MovieLayout>

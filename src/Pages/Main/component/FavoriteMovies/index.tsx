@@ -1,5 +1,5 @@
 import React from "react";
-import { getMovieDetails } from "@app/utils/movies";
+import { getMovieDetails, IMovies } from "@app/utils/movies";
 import { FavoriteMoviesItemBlock } from "./component/FavoriteMoviesItemBlock";
 import { MoviesLayout } from "./style";
 import { FavoriteMoviesItemList } from "./component/FavoriteMoviesItemLIst";
@@ -9,7 +9,7 @@ interface IFavoriteMoviesProps {
 }
 
 export const FavoriteMovies = ({ blockView }: IFavoriteMoviesProps) => {
-  let [movies, setMovies] = React.useState<any[]>([]);
+  let [movies, setMovies] = React.useState<IMovies[]>([]);
   const [filmsIds, setFilmsIds] = React.useState<number[]>(
     JSON.parse(localStorage["filmsIds"])
   );

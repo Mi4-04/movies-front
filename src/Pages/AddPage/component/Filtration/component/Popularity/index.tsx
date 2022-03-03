@@ -1,7 +1,12 @@
+import React from "react";
 import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
+import {
+  MIN_VALUE_SLIDER,
+  MAX_VALUE_SLIDER,
+  STEP_VALUE_SLIDER,
+} from "@app/constant";
 
 interface IPopularityProps {
   voteAverage: number;
@@ -14,8 +19,8 @@ export const Popularity = ({
 }: IPopularityProps) => {
   const { t } = useTranslation();
 
-  const handleChange = (e: any) => {
-    setVoteAverage(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVoteAverage(Number(e.target.value));
   };
 
   return (
@@ -23,14 +28,14 @@ export const Popularity = ({
       <Typography id="input-slider" gutterBottom>
         {t(`filter.vote_average`)}
       </Typography>
-      <Slider
-        min={0}
-        max={10}
-        step={0.1}
+      <input
+        type="range"
+        min={MIN_VALUE_SLIDER}
+        max={MAX_VALUE_SLIDER}
+        step={STEP_VALUE_SLIDER}
         value={voteAverage}
         onChange={handleChange}
         aria-labelledby="input-slider"
-        valueLabelDisplay="auto"
       />
     </Box>
   );

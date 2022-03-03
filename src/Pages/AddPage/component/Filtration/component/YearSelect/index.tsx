@@ -1,28 +1,26 @@
-import React from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useTranslation } from "react-i18next";
+import { SelectChangeEvent } from "@mui/material";
 
 interface IYearSelectProps {
   year: string;
-  setYear: (value: any) => void;
+  setYear: (value: string) => void;
 }
 
 export const YearSelect = ({ year, setYear }: IYearSelectProps) => {
   const { t } = useTranslation();
-  const [date, setDate] = React.useState<number[]>([]);
 
-  React.useEffect(() => {
-    for (let i = 1999; i <= new Date().getFullYear(); i++) {
-      date.push(i);
-    }
-    setDate([...date]);
-  }, []);
+  let date: number[] = [];
 
-  const handleChange = (e: any) => {
+  for (let i = 1999; i <= new Date().getFullYear(); i++) {
+    date.push(i);
+  }
+
+  const handleChange = (e: SelectChangeEvent<string>) => {
     setYear(e.target.value);
   };
 
@@ -39,13 +37,11 @@ export const YearSelect = ({ year, setYear }: IYearSelectProps) => {
           value={year}
           onChange={handleChange}
         >
-          {date?.map((dateYear) => {
-            return (
-              <MenuItem key={dateYear} value={dateYear}>
-                {dateYear}
-              </MenuItem>
-            );
-          })}
+          {date?.map((dateYear) => (
+            <MenuItem key={dateYear} value={dateYear}>
+              {dateYear}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Box>

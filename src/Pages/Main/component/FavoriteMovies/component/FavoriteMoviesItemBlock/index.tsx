@@ -9,9 +9,10 @@ import IconButton from "@mui/material/IconButton";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { MovieLayout } from "./style";
+import { IMovies } from "@app/utils/movies";
 
 export const FavoriteMoviesItemBlock = (props: {
-  film: any;
+  film: IMovies;
   handleWatched: (index: number) => void;
   deleteFilm: (id: number) => void;
   index: number;

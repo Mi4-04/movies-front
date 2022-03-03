@@ -14,13 +14,13 @@ interface IFriltrationProps {
   setGenres: (value: IGenre[]) => void;
 }
 
-export const Filtration = ( {
+export const Filtration = ({
   genres,
   year,
   setYear,
   voteAverage,
   setVoteAverage,
-  setGenres
+  setGenres,
 }: IFriltrationProps) => {
   return (
     <Box

@@ -23,24 +23,9 @@ const App = () => {
     localStorage.getItem("isLoggedIn") === "1"
   );
 
-  const [genres, setGenres] = React.useState<IGenre[]>([]);
-
   const [blockView, setBlockView] = React.useState<boolean>(false);
-
+  const [genres, setGenres] = React.useState<IGenre[]>([]);
   const [genresId, setGenresId] = React.useState<number[]>([]);
-
-  React.useEffect(() => {
-    setGenresId(
-      genres
-        .filter((w, index) => {
-          return genres[index].isClick;
-        })
-        .map((genre) => {
-          return genre.id;
-        })
-    );
-    localStorage.setItem("genres", JSON.stringify(genres));
-  }, [genres]);
 
   React.useEffect(() => {
     getGenreList().then((results) => {
@@ -53,6 +38,19 @@ const App = () => {
       );
     });
   }, []);
+
+  React.useEffect(() => {
+    const isClicked = genres
+      .filter((genre) => {
+        return genre.isClick;
+      })
+      .map((genre) => {
+        return genre.id;
+      });
+
+    setGenresId(isClicked);
+    localStorage.setItem("genres", JSON.stringify(genres));
+  }, [genres]);
 
   return (
     <BrowserRouter>
