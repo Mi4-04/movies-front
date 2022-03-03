@@ -4,7 +4,11 @@ import { FavoriteMoviesItemBlock } from "./component/FavoriteMoviesItemBlock";
 import { MoviesLayout } from "./style";
 import { FavoriteMoviesItemList } from "./component/FavoriteMoviesItemLIst";
 
-export const FavoriteMovies = (props: { blockAndListview: boolean }) => {
+interface IFavoriteMoviesProps {
+  blockView: boolean;
+}
+
+export const FavoriteMovies = ({ blockView }: IFavoriteMoviesProps) => {
   let [movies, setMovies] = React.useState<any[]>([]);
   const [filmsIds, setFilmsIds] = React.useState<number[]>(
     JSON.parse(localStorage["filmsIds"])
@@ -35,9 +39,9 @@ export const FavoriteMovies = (props: { blockAndListview: boolean }) => {
   };
 
   return (
-    <MoviesLayout blockAndListview={props.blockAndListview}>
+    <MoviesLayout blockView={blockView}>
       {movies.map((film, index) => {
-        return props.blockAndListview ? (
+        return blockView ? (
           <FavoriteMoviesItemBlock
             key={index}
             film={film}

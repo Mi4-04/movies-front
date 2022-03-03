@@ -9,7 +9,7 @@ export const MoviesList = (props: {
   genres: IGenre[];
   year: string;
   voteAverage: number;
-  blockAndListview: boolean;
+  blockView: boolean;
   genresId: number[];
 }) => {
   const [movies, setMovies] = React.useState<any[]>([]);
@@ -37,9 +37,9 @@ export const MoviesList = (props: {
   };
 
   return (
-    <MoviesLayout blockAndListview={props.blockAndListview}>
+    <MoviesLayout blockView={props.blockView}>
       {movies?.map((film, index) => {
-        return props.blockAndListview ? (
+        return props.blockView ? (
           <MoviesItemBlock
             key={index}
             film={film}

@@ -9,6 +9,6 @@ export const HeaderMovies = styled.h1`
   ${tw` block   items-start ml-10`}
 `;
 
-export const ButtonLayout = styled.div`
+export const LinkLayout = styled.div`
   ${tw`ml-2`}
 `;

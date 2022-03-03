@@ -25,8 +25,7 @@ const App = () => {
 
   const [genres, setGenres] = React.useState<IGenre[]>([]);
 
-  const [blockAndListview, setBlockAndListview] =
-    React.useState<boolean>(false);
+  const [blockView, setBlockView] = React.useState<boolean>(false);
 
   const [genresId, setGenresId] = React.useState<number[]>([]);
 
@@ -40,6 +39,7 @@ const App = () => {
           return genre.id;
         })
     );
+    localStorage.setItem("genres", JSON.stringify(genres));
   }, [genres]);
 
   React.useEffect(() => {
@@ -53,8 +53,6 @@ const App = () => {
       );
     });
   }, []);
-
-  localStorage.setItem("genres", JSON.stringify(genres));
 
   return (
     <BrowserRouter>
@@ -73,8 +71,8 @@ const App = () => {
               <Main
                 genres={genres}
                 setGenres={setGenres}
-                blockAndListview={blockAndListview}
-                setBlockAndListview={setBlockAndListview}
+                blockView={blockView}
+                setBlockView={setBlockView}
               />
             )}
           </Route>
@@ -88,8 +86,8 @@ const App = () => {
               <AddPage
                 genres={genres}
                 setGenres={setGenres}
-                blockAndListview={blockAndListview}
-                setBlockAndListview={setBlockAndListview}
+                blockView={blockView}
+                setBlockView={setBlockView}
                 genresId={genresId}
               />
             )}

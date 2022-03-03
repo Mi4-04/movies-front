@@ -10,16 +10,16 @@ import { ButtonPad } from "@app/components/ButtonPad";
 interface IAddPageProps {
   genres: IGenre[];
   setGenres: (value: any) => void;
-  blockAndListview: boolean;
-  setBlockAndListview: (value: boolean) => void;
+  blockView: boolean;
+  setBlockView: (value: boolean) => void;
   genresId: number[];
 }
 
 export const AddPage = ({
   genres,
   setGenres,
-  blockAndListview,
-  setBlockAndListview,
+  blockView,
+  setBlockView,
   genresId,
 }: IAddPageProps) => {
   const { t } = useTranslation();
@@ -39,14 +39,14 @@ export const AddPage = ({
           setVoteAverage={setVoteAverage}
           setGenres={setGenres}
         />
-        <ButtonPad setBlockAndListview={setBlockAndListview} />
+        <ButtonPad setBlockView={setBlockView} />
       </FilterLayout>
 
       <MoviesList
         genres={genres}
         year={year}
         voteAverage={voteAverage}
-        blockAndListview={blockAndListview}
+        blockView={blockView}
         genresId={genresId}
       />
     </div>

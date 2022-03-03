@@ -5,14 +5,14 @@ import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
 
 export const ButtonPad = (props: {
-  setBlockAndListview: (value: boolean) => void;
+  setBlockView: (value: boolean) => void;
 }) => {
   const handleViewBlock = () => {
-    props.setBlockAndListview(true);
+    props.setBlockView(true);
   };
 
   const handleViewList = () => {
-    props.setBlockAndListview(false);
+    props.setBlockView(false);
   };
 
   return (
