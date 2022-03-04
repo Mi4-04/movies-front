@@ -41,12 +41,8 @@ const App = () => {
 
   React.useEffect(() => {
     const isClicked = genres
-      .filter((genre) => {
-        return genre.isClick;
-      })
-      .map((genre) => {
-        return genre.id;
-      });
+      .filter((genre) => genre.isClick)
+      .map((genre) => genre.id);
 
     setGenresId(isClicked);
     localStorage.setItem("genres", JSON.stringify(genres));
