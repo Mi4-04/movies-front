@@ -1,5 +1,16 @@
 import { gql } from "@apollo/client";
 
+const CORE_GET_MOVIES_FIELDS = gql`
+  fragment CoreGetMoviesFields on Movie {
+    id
+    popularity
+    title
+    vote_average
+    release_date
+    poster_path
+  }
+`;
+
 export const GET_ALL_GENRES = gql`
   query Genres {
     genres {
@@ -10,30 +21,23 @@ export const GET_ALL_GENRES = gql`
 `;
 
 export const GET_ALL_MOVIES = gql`
+  ${CORE_GET_MOVIES_FIELDS}
   query Query($genresIds: [Float!]!, $voteAverage: Float!, $year: String!) {
     getAllMovies(
       genresIds: $genresIds
       voteAverage: $voteAverage
       year: $year
     ) {
-      id
-      popularity
-      title
-      vote_average
-      release_date
-      poster_path
+      ...CoreGetMoviesFields
     }
   }
 `;
 
 export const GET_MOVIE_DETAILS = gql`
+  ${CORE_GET_MOVIES_FIELDS}
   query GetMovieDetails($getMovieDetailsId: Float!) {
     getMovieDetails(id: $getMovieDetailsId) {
-      id
-      popularity
-      title
-      release_date
-      poster_path
+      ...CoreGetMoviesFields
     }
   }
 `;
