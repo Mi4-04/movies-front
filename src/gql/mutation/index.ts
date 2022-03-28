@@ -18,10 +18,12 @@ export const AUTH_USER = gql`
 `;
 
 export const ADD_FAV_MOVIES = gql`
-  ${CORE_MOVIE_FIELDS}
   mutation Mutation($addFavMoviesId: Float!) {
     addFavMovies(id: $addFavMoviesId) {
-      ...CoreMovieFields
+      id
+      moviesId
+      watched
+      createDate
       user {
         id
       }
@@ -30,19 +32,23 @@ export const ADD_FAV_MOVIES = gql`
 `;
 
 export const UPDATE_WATCHED = gql`
-  ${CORE_MOVIE_FIELDS}
   mutation UpdateWatched($updateWatchedId: Float!) {
     updateWatched(id: $updateWatchedId) {
-      ...CoreMovieFields
+      id
+      moviesId
+      watched
+      createDate
     }
   }
 `;
 
 export const REMOVE_FAV_MOVIES = gql`
-  ${CORE_MOVIE_FIELDS}
   mutation Mutation($removeFavMoviesId: Float!) {
     removeFavMovies(id: $removeFavMoviesId) {
-      ...CoreMovieFields
+      id
+      moviesId
+      watched
+      createDate
     }
   }
 `;

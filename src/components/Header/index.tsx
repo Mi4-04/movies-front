@@ -1,34 +1,30 @@
+import React from "react";
 import { MainHeader, TextHeader, Title } from "./style";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { AuthContext } from "@app/utils/user";
 
 interface IHeaderProp {
-  isLogged: boolean;
-  setIsLogged: (value: any) => void;
   userLogin: string;
 }
 
-export const Header = ({ isLogged, setIsLogged, userLogin }: IHeaderProp) => {
+export const Header = ({ userLogin }: IHeaderProp) => {
   const { t } = useTranslation();
 
-  const handleLogOut = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userLogin");
-    setIsLogged(false);
-  };
+  const { user, logout } = React.useContext(AuthContext);
 
   return (
     <MainHeader>
       <Link to="/">
         <Title>{t(`header_title`)}</Title>
       </Link>
-      {isLogged ? (
+      {user ? (
         <div>
           <TextHeader>
             {" "}
             {t(`authorization.hello`)} {userLogin} &nbsp;
-            <NavLink onClick={handleLogOut} exact to="/login">
+            <NavLink onClick={logout} exact to="/login">
               {t(`authorization.logout`)}
             </NavLink>
           </TextHeader>

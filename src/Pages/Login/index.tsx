@@ -1,32 +1,52 @@
+import React from "react";
 import { useHistory } from "react-router";
 import { FieldInput } from "@app/Pages/Login/component/FieldInput";
 import { Form } from "react-final-form";
 import { FORM_ERROR } from "final-form";
 import { Button } from "@material-ui/core";
 import { Password, ButtonCome, Container, AuthBlock } from "./style";
-import { isValidUser } from "@app/utils/users";
 import { useTranslation } from "react-i18next";
 import logo from "@app/Pages/Login/assets/Logo.svg";
+import { useMutation } from "@apollo/client";
+import { AUTH_USER } from "@app/gql/mutation";
+import CircularProgress from "@mui/material/CircularProgress";
+import { AuthContext } from "@app/utils/user";
 
-export const LoginPage = (props: {
-  setIsLogged: (value: boolean) => void;
-  setUserLogin: (value: string) => void;
-}) => {
+interface ILogin {
+  login: string;
+  password: string;
+}
+
+export const LoginPage = (props: { setUserLogin: (value: string) => void }) => {
   const { t } = useTranslation();
   const history = useHistory();
   const required = (value: string): string => {
     return value ? "" : t("authorization.emptyFiled");
   };
 
-  const onSubmit = (data: any) => {
-    if (isValidUser(data.login, data.password)) {
-      return { [FORM_ERROR]: t("authorization.incorrectData") };
-    }
+  const context = React.useContext(AuthContext);
 
-    localStorage.setItem("isLoggedIn", "1");
+  const [login, { loading }] = useMutation(AUTH_USER);
+
+  if (loading) {
+    return <CircularProgress color="success" />;
+  }
+
+  const onSubmit = (data: ILogin) => {
+    login({
+      variables: {
+        login: data.login,
+        password: data.password,
+      },
+      onCompleted: (data) => {
+        context.signIn(data.signIn.accessToken);
+      },
+    });
+
     localStorage.setItem("userLogin", data.login);
-    props.setIsLogged(true);
+
     props.setUserLogin(data.login);
+
     history.push("/");
   };
 

@@ -3,6 +3,9 @@ import { getMovieDetails, IMovies } from "@app/utils/movies";
 import { FavoriteMoviesItemBlock } from "./component/FavoriteMoviesItemBlock";
 import { MoviesLayout } from "./style";
 import { FavoriteMoviesItemList } from "./component/FavoriteMoviesItemLIst";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_MOVIE_DETAILS } from "@app/gql/query";
+import { REMOVE_FAV_MOVIES, UPDATE_WATCHED } from "@app/gql/mutation";
 
 interface IFavoriteMoviesProps {
   blockView: boolean;
@@ -14,6 +17,9 @@ export const FavoriteMovies = ({ blockView }: IFavoriteMoviesProps) => {
     JSON.parse(localStorage["filmsIds"])
   );
 
+  const [updateWatched] = useMutation(UPDATE_WATCHED);
+  const [removeFavMovies] = useMutation(REMOVE_FAV_MOVIES);
+
   React.useEffect(() => {
     setMovies([]);
     filmsIds.map((id) => {
@@ -23,19 +29,45 @@ export const FavoriteMovies = ({ blockView }: IFavoriteMoviesProps) => {
     });
   }, []);
 
+  let movieId;
+
+  let newFilmsIds = movies.map((film) => (movieId = film.id));
+
+  const { data, loading } = useQuery(GET_MOVIE_DETAILS, {
+    variables: {
+      getMovieDetailsId: movieId,
+    },
+  });
+
   React.useEffect(() => {
-    let newFilmsIds = movies.map((film) => film.id);
+    if (!loading) {
+      setFilmsIds(data.getMovieDetails);
+    }
+
     localStorage.setItem("filmsIds", JSON.stringify(newFilmsIds));
-    setFilmsIds(newFilmsIds);
-  }, [movies]);
+  }, [data]);
 
   const handleWatched = (index: number) => {
     movies[index].watched = !movies[index].watched;
     setMovies([...movies]);
+    let filmId;
+    movies.map((movie) => (filmId = movie.id));
+
+    updateWatched({
+      variables: {
+        updateWatchedId: filmId,
+      },
+    });
   };
 
   const deleteFilm = (id: number) => {
     setMovies(movies.filter((film) => film.id !== id));
+
+    removeFavMovies({
+      variables: {
+        removeFavMoviesId: id,
+      },
+    });
   };
 
   return (
