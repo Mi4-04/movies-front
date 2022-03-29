@@ -28,10 +28,7 @@ export const MoviesList = ({
     JSON.parse(localStorage["filmsIds"])
   );
 
-  const handleChangePage = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
+  const handleChangePage = (_: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 

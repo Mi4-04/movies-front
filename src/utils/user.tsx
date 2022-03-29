@@ -3,13 +3,13 @@ import jwtDecode from "jwt-decode";
 import { useAppApolloClient } from "@app/config/apolloClient";
 
 interface AuthContextState {
-  token: any;
+  token: string;
   signIn: (token: string) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextState>({
-  token: null,
+  token: "",
   signIn: (token: string) => {},
   logout: () => {},
 });
