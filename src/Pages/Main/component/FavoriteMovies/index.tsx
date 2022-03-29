@@ -31,7 +31,7 @@ export const FavoriteMovies = ({ blockView }: IFavoriteMoviesProps) => {
 
   let movieId;
 
-  let newFilmsIds = movies.map((film) => (movieId = film.id));
+  let newFilmsIds = movies.filter((film) => (movieId = film.id));
 
   const { data, loading } = useQuery(GET_MOVIE_DETAILS, {
     variables: {
@@ -51,7 +51,7 @@ export const FavoriteMovies = ({ blockView }: IFavoriteMoviesProps) => {
     movies[index].watched = !movies[index].watched;
     setMovies([...movies]);
     let filmId;
-    movies.map((movie) => (filmId = movie.id));
+    movies.filter((movie) => (filmId = movie.id));
 
     updateWatched({
       variables: {

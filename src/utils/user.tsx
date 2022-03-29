@@ -1,21 +1,24 @@
 import React, { useState, useCallback, createContext, useEffect } from "react";
 import jwtDecode from "jwt-decode";
+import { useAppApolloClient } from "@app/config/apolloClient";
 
 interface AuthContextState {
-  user: null;
-  signIn: (data: string) => void;
+  token: any;
+  signIn: (token: string) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextState>({
-  user: null,
-  signIn: (data: string) => {},
+  token: null,
+  signIn: (token: string) => {},
   logout: () => {},
 });
 
 const AuthProvider = (props: any) => {
   const jwtToken = localStorage.getItem("accessToken");
-  const [users, setUser] = useState(jwtToken);
+  const [accessToken, setAccessToken] = useState(jwtToken);
+
+  const apolloClient = useAppApolloClient();
 
   useEffect(() => {
     if (jwtToken) {
@@ -23,7 +26,7 @@ const AuthProvider = (props: any) => {
 
       if ((decodedToken as any).exp * 1000 < Date.now()) {
         localStorage.removeItem("accessToken");
-        setUser(null);
+        setAccessToken(null);
       }
     }
   }, [jwtToken]);
@@ -31,19 +34,23 @@ const AuthProvider = (props: any) => {
   const signIn = useCallback(
     (token) => {
       localStorage.setItem("accessToken", token);
-      setUser(token);
+      setAccessToken(token);
     },
-    [setUser]
+    [setAccessToken]
   );
 
   const logout = useCallback(() => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("userLogin");
-    setUser(null);
-  }, [setUser]);
+    setAccessToken(null);
+    apolloClient.resetStore();
+  }, [setAccessToken]);
 
   return (
-    <AuthContext.Provider value={{ user: users, logout, signIn }} {...props} />
+    <AuthContext.Provider
+      value={{ token: accessToken, logout, signIn }}
+      {...props}
+    />
   );
 };
 

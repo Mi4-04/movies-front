@@ -1,16 +1,15 @@
-import React, { useContext } from "react";
-
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthContext } from "@app/utils/user";
 
-export const AuthRoute = ({ component: Component, ...args }: any) => {
-  const { user } = useContext(AuthContext);
+export const PrivateRoute = ({ component, ...args }: any) => {
+  const { token } = React.useContext(AuthContext);
 
   return (
     <Route
       {...args}
       render={(props) =>
-        !user ? <Component {...props} /> : <Redirect to="/" />
+        token ? React.createElement(component, props) : <Redirect to="/login" />
       }
     />
   );

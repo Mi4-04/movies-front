@@ -12,8 +12,7 @@ import {
 import { ApolloProvider } from "@apollo/client";
 import { useAppApolloClient } from "./config/apolloClient";
 import { AuthProvider } from "./utils/user";
-import { AuthRoute } from "./components/PrivateRouter";
-
+import { PrivateRoute } from "./components/PrivateRouter";
 
 const App = () => {
   isValidFilmsIdAndFilms();
@@ -57,19 +56,19 @@ const App = () => {
             <Header userLogin={userLogin as string} />
 
             <Switch>
-              <Route exact path="/">
+              <PrivateRoute exact path="/">
                 <Main
                   genres={genres}
                   setGenres={setGenres}
                   blockView={blockView}
                   setBlockView={setBlockView}
                 />
-              </Route>
+              </PrivateRoute>
 
-              <AuthRoute exact path="/login">
+              <Route exact path="/login">
                 <LoginPage setUserLogin={setUserLogin} />
-              </AuthRoute>
-              <Route path="/add">
+              </Route>
+              <PrivateRoute path="/add">
                 <AddPage
                   genres={genres}
                   setGenres={setGenres}
@@ -77,7 +76,7 @@ const App = () => {
                   setBlockView={setBlockView}
                   genresId={genresId}
                 />
-              </Route>
+              </PrivateRoute>
             </Switch>
           </div>
         </BrowserRouter>

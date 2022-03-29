@@ -12,14 +12,15 @@ interface IHeaderProp {
 export const Header = ({ userLogin }: IHeaderProp) => {
   const { t } = useTranslation();
 
-  const { user, logout } = React.useContext(AuthContext);
+  const { token, logout } = React.useContext(AuthContext);
+
 
   return (
     <MainHeader>
       <Link to="/">
         <Title>{t(`header_title`)}</Title>
       </Link>
-      {user ? (
+      {token ? (
         <div>
           <TextHeader>
             {" "}

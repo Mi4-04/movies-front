@@ -1,12 +1,13 @@
 import React from "react";
 import { getMoviesList, IGenre, IMovies } from "@app/utils/movies";
-import { DEFAULT_PAGE, DEFAULT_SORT_BY } from "@app/constant";
 import { MoviesItemBlock } from "./component/MoviesItemBlock";
 import { MoviesLayout } from "./style";
 import { MoviesItemList } from "./component/MoviesItemList";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_ALL_MOVIES } from "@app/gql/query";
 import { ADD_FAV_MOVIES } from "@app/gql/mutation";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 interface IMoviesList {
   year: string;
@@ -22,10 +23,17 @@ export const MoviesList = ({
   genresId,
 }: IMoviesList) => {
   const [movies, setMovies] = React.useState<IMovies[]>([]);
-
+  const [page, setPage] = React.useState(1);
   const [filmsIds, setFilmsIds] = React.useState<number[]>(
     JSON.parse(localStorage["filmsIds"])
   );
+
+  const handleChangePage = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
+  };
 
   const [addFavMovies] = useMutation(ADD_FAV_MOVIES);
 
@@ -43,6 +51,7 @@ export const MoviesList = ({
   const { data, loading } = useQuery(GET_ALL_MOVIES, {
     variables: {
       genresIds: genresId,
+      page: page,
       voteAverage: voteAverage,
       year: year,
     },
@@ -73,6 +82,10 @@ export const MoviesList = ({
           />
         );
       })}
+
+      <Stack spacing={2}>
+        <Pagination count={10} page={page} onChange={handleChangePage} />
+      </Stack>
     </MoviesLayout>
   );
 };

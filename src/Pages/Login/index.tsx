@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory } from "react-router";
 import { FieldInput } from "@app/Pages/Login/component/FieldInput";
 import { Form } from "react-final-form";
-import { FORM_ERROR } from "final-form";
 import { Button } from "@material-ui/core";
 import { Password, ButtonCome, Container, AuthBlock } from "./style";
 import { useTranslation } from "react-i18next";
@@ -24,28 +23,28 @@ export const LoginPage = (props: { setUserLogin: (value: string) => void }) => {
     return value ? "" : t("authorization.emptyFiled");
   };
 
-  const context = React.useContext(AuthContext);
+  const { signIn } = React.useContext(AuthContext);
 
-  const [login, { loading }] = useMutation(AUTH_USER);
+  const [loginUser, { loading }] = useMutation(AUTH_USER);
 
   if (loading) {
     return <CircularProgress color="success" />;
   }
 
-  const onSubmit = (data: ILogin) => {
-    login({
+  const onSubmit = ({ login, password }: ILogin) => {
+    loginUser({
       variables: {
-        login: data.login,
-        password: data.password,
+        login,
+        password,
       },
-      onCompleted: (data) => {
-        context.signIn(data.signIn.accessToken);
+      onCompleted: (data: any) => {
+        signIn(data.signIn.accessToken);
       },
     });
 
-    localStorage.setItem("userLogin", data.login);
+    localStorage.setItem("userLogin", login);
 
-    props.setUserLogin(data.login);
+    props.setUserLogin(login);
 
     history.push("/");
   };
