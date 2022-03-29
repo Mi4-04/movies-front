@@ -24,7 +24,7 @@ export const FavoriteMoviesItemBlock = (props: {
       <Card sx={{ mt: 4, maxWidth: 250 }}>
         <CardMedia
           component="img"
-          image={`${URL_POST}${props.film.poster_path}`}
+          image={`${URL_POST}${props.film.posterPath}`}
           alt={`${props.film.title}`}
         />
         <CardContent>
@@ -35,11 +35,11 @@ export const FavoriteMoviesItemBlock = (props: {
             {t(`film.popularity`)} {props.film.popularity}
           </Typography>
           <Typography variant="body1">
-            {t(`film.vote_average`)}
-            {props.film.vote_average}
+            {t(`film.voteAverage`)}
+            {props.film.voteAverage}
           </Typography>
           <Typography variant="body1">
-            {t(`film.release_date`)} {props.film.release_date}
+            {t(`film.releaseDate`)} {props.film.releaseDate}
           </Typography>
         </CardContent>
         <CardActions>

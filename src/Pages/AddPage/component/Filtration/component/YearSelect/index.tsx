@@ -28,12 +28,12 @@ export const YearSelect = ({ year, setYear }: IYearSelectProps) => {
     <Box sx={{ mt: 2, mb: 2, ml: 3, width: 250 }}>
       <FormControl fullWidth>
         <InputLabel form="demo-simple-select-label">
-          {t(`filter.release_date`)}
+          {t(`filter.releaseDate`)}
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          label={t(`filter.release_date`)}
+          label={t(`filter.releaseDate`)}
           value={year}
           onChange={handleChange}
         >

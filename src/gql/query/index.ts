@@ -5,9 +5,9 @@ const CORE_GET_MOVIES_FIELDS = gql`
     id
     popularity
     title
-    vote_average
-    release_date
-    poster_path
+    voteAverage
+    releaseDate
+    posterPath
   }
 `;
 
@@ -40,10 +40,10 @@ export const GET_ALL_MOVIES = gql`
 `;
 
 export const GET_MOVIE_DETAILS = gql`
-${CORE_GET_MOVIES_FIELDS}
+  ${CORE_GET_MOVIES_FIELDS}
   query GetMovieDetails($getMovieDetailsId: Float!) {
     getMovieDetails(id: $getMovieDetailsId) {
-    ...CoreGetMoviesFields
+      ...CoreGetMoviesFields
     }
   }
 `;
