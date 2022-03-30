@@ -29,13 +29,13 @@ export const FavoriteMovies = ({ blockView }: IFavoriteMoviesProps) => {
     });
   }, []);
 
-  let movieId;
+  let newFilmsIds = movies.map((film) => film.id);
 
-  let newFilmsIds = movies.filter((film) => (movieId = film.id));
+  let newFilms = movies.find((film) => film.id);
 
   const { data, loading } = useQuery(GET_MOVIE_DETAILS, {
     variables: {
-      getMovieDetailsId: movieId,
+      getMovieDetailsId: newFilms?.id,
     },
   });
 
@@ -50,12 +50,10 @@ export const FavoriteMovies = ({ blockView }: IFavoriteMoviesProps) => {
   const handleWatched = (index: number) => {
     movies[index].watched = !movies[index].watched;
     setMovies([...movies]);
-    let filmId;
-    movies.filter((movie) => (filmId = movie.id));
 
     updateWatched({
       variables: {
-        updateWatchedId: filmId,
+        updateWatchedId: newFilms?.id,
       },
     });
   };
