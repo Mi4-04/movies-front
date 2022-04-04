@@ -12,13 +12,13 @@
   "movies": "Your favorite movies",
   "add": "Add",
   "filter": {
-    "vote_average": "Vote average",
-    "release_date": "Release date"
+    "voteAverage": "Vote average",
+    "releaseDate": "Release date"
   },
   "film": {
     "popularity": "Popularity: ",
-    "vote_average": "Vote average: ",
-    "release_date": "Release date: ",
+    "voteAverage": "Vote average: ",
+    "releaseDate": "Release date: ",
     "save": "Save it"
   },
   "filter_header": "Choose your destiny",

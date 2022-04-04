@@ -10,47 +10,76 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { MovieLayout } from "./style";
 import { IMovies } from "@app/utils/movies";
+import React from "react";
+import { useMutation } from "@apollo/client";
+import { UPDATE_WATCHED } from "@app/gql/mutation";
+import { idText } from "typescript";
 
-export const FavoriteMoviesItemBlock = (props: {
+interface IFavoriteMoviesProps {
   film: IMovies;
-  handleWatched: (index: number) => void;
   deleteFilm: (id: number) => void;
-  index: number;
-}) => {
+}
+
+export const FavoriteMoviesItem = ({
+  film,
+  deleteFilm,
+}: IFavoriteMoviesProps) => {
   const { t } = useTranslation();
 
+  const { id, posterPath, title, popularity, voteAverage, releaseDate } = film;
+  const [updateWatched] = useMutation(UPDATE_WATCHED);
+
+  const isWatched = localStorage.getItem(String(id));
+
+  const [watched, setWatched] = React.useState<boolean>(
+    JSON.parse(String(isWatched))
+  );
+
+  const handleWatched = (id: number) => {
+    updateWatched({
+      variables: {
+        updateWatchedId: id,
+      },
+      onCompleted: (data) => {
+        setWatched(data.updateWatched.watched);
+      },
+    });
+
+    localStorage.setItem(JSON.stringify(id), JSON.stringify(!watched));
+  };
+
   return (
-    <MovieLayout watched={props.film.watched}>
+    <MovieLayout watched={watched}>
       <Card sx={{ mt: 4, maxWidth: 250 }}>
         <CardMedia
           component="img"
-          image={`${URL_POST}${props.film.poster_path}`}
-          alt={`${props.film.title}`}
+          image={`${URL_POST}${posterPath}`}
+          alt={`${title}`}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {props.film.title}
+            {title}
           </Typography>
           <Typography variant="body1">
-            {t(`film.popularity`)} {props.film.popularity}
+            {t(`film.popularity`)} {popularity}
           </Typography>
           <Typography variant="body1">
-            {t(`film.vote_average`)}
-            {props.film.vote_average}
+            {t(`film.voteAverage`)}
+            {voteAverage}
           </Typography>
           <Typography variant="body1">
-            {t(`film.release_date`)} {props.film.release_date}
+            {t(`film.releaseDate`)} {releaseDate}
           </Typography>
         </CardContent>
         <CardActions>
           <IconButton
-            onClick={() => props.handleWatched(props.index)}
+            onClick={() => handleWatched(id)}
             color="success"
             size="large"
           >
             <CheckBoxIcon />
           </IconButton>
-          <IconButton onClick={() => props.deleteFilm(props.film.id)}>
+          <IconButton onClick={() => deleteFilm(id)}>
             <DeleteIcon />
           </IconButton>
         </CardActions>

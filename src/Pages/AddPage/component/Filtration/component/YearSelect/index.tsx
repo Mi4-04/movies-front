@@ -7,8 +7,8 @@ import { useTranslation } from "react-i18next";
 import { SelectChangeEvent } from "@mui/material";
 
 interface IYearSelectProps {
-  year: string;
-  setYear: (value: string) => void;
+  year: number;
+  setYear: (value: number) => void;
 }
 
 export const YearSelect = ({ year, setYear }: IYearSelectProps) => {
@@ -20,20 +20,20 @@ export const YearSelect = ({ year, setYear }: IYearSelectProps) => {
     date.push(i);
   }
 
-  const handleChange = (e: SelectChangeEvent<string>) => {
-    setYear(e.target.value);
+  const handleChange = (e: SelectChangeEvent<number>) => {
+    setYear(e.target.value as number);
   };
 
   return (
     <Box sx={{ mt: 2, mb: 2, ml: 3, width: 250 }}>
       <FormControl fullWidth>
         <InputLabel form="demo-simple-select-label">
-          {t(`filter.release_date`)}
+          {t(`filter.releaseDate`)}
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          label={t(`filter.release_date`)}
+          label={t(`filter.releaseDate`)}
           value={year}
           onChange={handleChange}
         >

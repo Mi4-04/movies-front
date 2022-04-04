@@ -12,13 +12,13 @@
   "movies": "Ваши любимые фильмы",
   "add": "Добавить",
   "filter": {
-    "vote_average": "Рейтинг",
-    "release_date": "Дата выхода"
+    "voteAverage": "Рейтинг",
+    "releaseDate": "Дата выхода"
   },
   "film": {
     "popularity": "Популярность: ",
-    "vote_average": "Рейтинг: ",
-    "release_date": "Дата выхода: ",
+    "voteAverage": "Рейтинг: ",
+    "releaseDate": "Дата выхода: ",
     "save": "Сохранить"
   },
   "filter_header": "Выберите понравившейся фильм",

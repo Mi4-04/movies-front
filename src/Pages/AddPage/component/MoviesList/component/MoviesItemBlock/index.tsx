@@ -18,7 +18,7 @@ export const MoviesItemBlock = ({ film, filmsIds, saveFilm }: IMovieItem) => {
       <Card sx={{ mt: 4, maxWidth: 250 }}>
         <CardMedia
           component="img"
-          image={`${URL_POST}${film.poster_path}`}
+          image={`${URL_POST}${film.posterPath}`}
           alt={`${film.title}`}
         />
         <CardContent>
@@ -29,11 +29,11 @@ export const MoviesItemBlock = ({ film, filmsIds, saveFilm }: IMovieItem) => {
             {t(`film.popularity`)} {film.popularity}
           </Typography>
           <Typography variant="body1">
-            {t(`film.vote_average`)}
-            {film.vote_average}
+            {t(`film.voteAverage`)}
+            {film.voteAverage}
           </Typography>
           <Typography variant="body1">
-            {t(`film.release_date`)} {film.release_date}
+            {t(`film.releaseDate`)} {film.releaseDate}
           </Typography>
         </CardContent>
         <CardActions>

@@ -26,7 +26,7 @@ export const Popularity = ({
   return (
     <Box sx={{ ml: 4, width: 250 }}>
       <Typography id="input-slider" gutterBottom>
-        {t(`filter.vote_average`)}
+        {t(`filter.voteAverage`)}
       </Typography>
       <input
         type="range"

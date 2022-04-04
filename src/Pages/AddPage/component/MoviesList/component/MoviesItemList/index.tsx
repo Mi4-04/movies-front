@@ -19,7 +19,7 @@ export const MoviesItemList = ({ film, filmsIds, saveFilm }: IMovieItem) => {
 
   return (
     <MovieLayout>
-      <MovieImg src={`${URL_POST}${film.poster_path}`} />
+      <MovieImg src={`${URL_POST}${film.posterPath}`} />
       <DescriptionLayout>
         <TitleLayout>
           <MovieTitle>{film.title}</MovieTitle>
@@ -28,7 +28,7 @@ export const MoviesItemList = ({ film, filmsIds, saveFilm }: IMovieItem) => {
           {t(`film.popularity`)} {film.popularity}
         </MoviePopularity>
         <ReleaseDate>
-          {t(`film.release_date`)} {film.release_date}
+          {t(`film.releaseDate`)} {film.releaseDate}
         </ReleaseDate>
       </DescriptionLayout>
 

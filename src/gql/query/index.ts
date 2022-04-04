@@ -1,13 +1,13 @@
 import { gql } from "@apollo/client";
 
 const CORE_GET_MOVIES_FIELDS = gql`
-  fragment CoreGetMoviesFields on Movie {
+  fragment CoreGetMoviesFields on FavMoviesDto {
     id
     popularity
     title
-    vote_average
-    release_date
-    poster_path
+    voteAverage
+    releaseDate
+    posterPath
   }
 `;
 
@@ -22,9 +22,15 @@ export const GET_ALL_GENRES = gql`
 
 export const GET_ALL_MOVIES = gql`
   ${CORE_GET_MOVIES_FIELDS}
-  query Query($genresIds: [Float!]!, $voteAverage: Float!, $year: String!) {
+  query GetAllMovies(
+    $genresIds: [Float!]!
+    $page: Float!
+    $voteAverage: Float!
+    $year: Float!
+  ) {
     getAllMovies(
       genresIds: $genresIds
+      page: $page
       voteAverage: $voteAverage
       year: $year
     ) {
@@ -38,6 +44,16 @@ export const GET_MOVIE_DETAILS = gql`
   query GetMovieDetails($getMovieDetailsId: Float!) {
     getMovieDetails(id: $getMovieDetailsId) {
       ...CoreGetMoviesFields
+    }
+  }
+`;
+
+export const GET_FAV_MOVIES = gql`
+  ${CORE_GET_MOVIES_FIELDS}
+  query GetFavMovies {
+    getFavMovies {
+      ...CoreGetMoviesFields
+      watched
     }
   }
 `;
