@@ -7,8 +7,8 @@ import { useTranslation } from "react-i18next";
 import { SelectChangeEvent } from "@mui/material";
 
 interface IYearSelectProps {
-  year: string;
-  setYear: (value: string) => void;
+  year: number;
+  setYear: (value: number) => void;
 }
 
 export const YearSelect = ({ year, setYear }: IYearSelectProps) => {
@@ -20,8 +20,8 @@ export const YearSelect = ({ year, setYear }: IYearSelectProps) => {
     date.push(i);
   }
 
-  const handleChange = (e: SelectChangeEvent<string>) => {
-    setYear(e.target.value);
+  const handleChange = (e: SelectChangeEvent<number>) => {
+    setYear(e.target.value as number);
   };
 
   return (

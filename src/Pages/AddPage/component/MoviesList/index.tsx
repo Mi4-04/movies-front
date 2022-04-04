@@ -1,5 +1,5 @@
 import React from "react";
-import { getMoviesList, IGenre, IMovies } from "@app/utils/movies";
+import { IMovies } from "@app/utils/movies";
 import { MoviesItemBlock } from "./component/MoviesItemBlock";
 import { MoviesLayout } from "./style";
 import { MoviesItemList } from "./component/MoviesItemList";
@@ -10,7 +10,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
 interface IMoviesList {
-  year: string;
+  year: number;
   voteAverage: number;
   blockView: boolean;
   genresId: number[];

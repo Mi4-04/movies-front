@@ -7,8 +7,8 @@ import { GenreList } from "@app/components/GenreList";
 
 interface IFriltrationProps {
   genres: IGenre[];
-  year: string;
-  setYear: (value: string) => void;
+  year: number;
+  setYear: (value: number) => void;
   voteAverage: number;
   setVoteAverage: (value: number) => void;
   setGenres: (value: IGenre[]) => void;

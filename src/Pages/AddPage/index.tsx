@@ -23,7 +23,7 @@ export const AddPage = ({
   genresId,
 }: IAddPageProps) => {
   const { t } = useTranslation();
-  const [year, setYear] = React.useState<string>(DEFAULT_YEAR);
+  const [year, setYear] = React.useState<number>(DEFAULT_YEAR);
   const [voteAverage, setVoteAverage] =
     React.useState<number>(DEFAULT_VOTE_AVARAGE);
 

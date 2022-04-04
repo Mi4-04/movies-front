@@ -10,17 +10,33 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { MovieLayout } from "./style";
 import { IMovies } from "@app/utils/movies";
+import React from "react";
+import { useMutation } from "@apollo/client";
+import { UPDATE_WATCHED } from "@app/gql/mutation";
 
-export const FavoriteMoviesItemBlock = (props: {
+export const FavoriteMoviesItem = (props: {
   film: IMovies;
-  handleWatched: (index: number) => void;
+
   deleteFilm: (id: number) => void;
-  index: number;
 }) => {
   const { t } = useTranslation();
 
+  const [updateWatched] = useMutation(UPDATE_WATCHED);
+  const [watched, setWatched] = React.useState<boolean>(false);
+
+  const handleWatched = (id: number) => {
+    updateWatched({
+      variables: {
+        updateWatchedId: id,
+      },
+      onCompleted: (data) => {
+        setWatched(data.updateWatched.watched);
+      },
+    });
+  };
+
   return (
-    <MovieLayout watched={props.film.watched}>
+    <MovieLayout watched={watched}>
       <Card sx={{ mt: 4, maxWidth: 250 }}>
         <CardMedia
           component="img"
@@ -44,7 +60,7 @@ export const FavoriteMoviesItemBlock = (props: {
         </CardContent>
         <CardActions>
           <IconButton
-            onClick={() => props.handleWatched(props.index)}
+            onClick={() => handleWatched(props.film.id)}
             color="success"
             size="large"
           >

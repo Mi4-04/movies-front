@@ -26,7 +26,7 @@ export const GET_ALL_MOVIES = gql`
     $genresIds: [Float!]!
     $page: Float!
     $voteAverage: Float!
-    $year: String!
+    $year: Float!
   ) {
     getAllMovies(
       genresIds: $genresIds
@@ -44,6 +44,16 @@ export const GET_MOVIE_DETAILS = gql`
   query GetMovieDetails($getMovieDetailsId: Float!) {
     getMovieDetails(id: $getMovieDetailsId) {
       ...CoreGetMoviesFields
+    }
+  }
+`;
+
+export const GET_FAV_MOVIES = gql`
+  ${CORE_GET_MOVIES_FIELDS}
+  query GetFavMovies {
+    getFavMovies {
+      ...CoreGetMoviesFields
+      watched
     }
   }
 `;
