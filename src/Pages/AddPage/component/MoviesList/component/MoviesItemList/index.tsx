@@ -34,7 +34,7 @@ export const MoviesItemList = ({ film, filmsIds, saveFilm }: IMovieItem) => {
 
       <ButtonPadLayout>
         <Button
-          color={filmsIds.includes(film.id) ? "success" : "primary"}
+          color={filmsIds.includes(film.id) ? "error" : "primary"}
           onClick={() => saveFilm(film.id)}
           size="small"
         >

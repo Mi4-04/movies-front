@@ -17,7 +17,9 @@ export const FavoriteMovies = ({ blockView }: IFavoriteMoviesProps) => {
     JSON.parse(localStorage["filmsIds"])
   );
   let [movies, setMovies] = React.useState<IMovies[]>([]);
-  const { data, loading } = useQuery(GET_FAV_MOVIES);
+  const { data, loading } = useQuery(GET_FAV_MOVIES, {
+    pollInterval: 500,
+  });
 
   React.useEffect(() => {
     if (!loading) {
@@ -38,6 +40,8 @@ export const FavoriteMovies = ({ blockView }: IFavoriteMoviesProps) => {
         removeFavMoviesId: id,
       },
     });
+
+    localStorage.getItem(String(id)) && localStorage.removeItem(String(id));
     setMovies(movies.filter((film) => film.id !== id));
   };
 
