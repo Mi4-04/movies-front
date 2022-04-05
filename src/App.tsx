@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Header } from "@app/components/Header";
 import { LoginPage } from "@app/Pages/Login";
 import { Main } from "./Pages/Main";
@@ -64,8 +64,7 @@ const App = () => {
                   setBlockView={setBlockView}
                 />
               </PrivateRoute>
-
-              <Route exact path="/login">
+              <Route path="/login">
                 <LoginPage setUserLogin={setUserLogin} />
               </Route>
               <PrivateRoute path="/add">
