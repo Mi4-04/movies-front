@@ -39,14 +39,13 @@ export const LoginPage = (props: { setUserLogin: (value: string) => void }) => {
       },
       onCompleted: (data: any) => {
         signIn(data.signIn.accessToken);
+        localStorage.setItem("userLogin", login);
+
+        props.setUserLogin(login);
+
+        history.push("/");
       },
     });
-
-    localStorage.setItem("userLogin", login);
-
-    props.setUserLogin(login);
-
-    history.push("/");
   };
 
   return (
