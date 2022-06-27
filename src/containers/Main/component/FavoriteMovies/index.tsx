@@ -12,28 +12,30 @@ interface IFavoriteMoviesProps {
 
 export const FavoriteMovies = ({ blockView }: IFavoriteMoviesProps) => {
   const [removeFavMovies] = useMutation(REMOVE_FAV_MOVIES);
-
-  const [filmsIds, setFilmsIds] = React.useState<number[]>(
-    JSON.parse(localStorage["filmsIds"])
-  );
   let [movies, setMovies] = React.useState<IMovies[]>([]);
-  const { data, loading } = useQuery(GET_FAV_MOVIES, {
-    pollInterval: 500,
-  });
+  if (typeof window !== "undefined") {
+    const [filmsIds, setFilmsIds] = React.useState<number[]>(
+      JSON.parse(localStorage["filmsIds"])
+    );
 
-  React.useEffect(() => {
-    if (!loading) {
-      setMovies(data.getFavMovies);
-    }
-  }, [data]);
+    const { data, loading, refetch } = useQuery(GET_FAV_MOVIES, {
+      pollInterval: 500,
+    });
 
-  React.useEffect(() => {
-    let newFilmsIds = movies.map((film) => film.id);
-    localStorage.setItem("filmsIds", JSON.stringify(newFilmsIds));
+    React.useEffect(() => {
+      if (!loading) {
+        setMovies(data.getFavMovies);
+        refetch();
+      }
+    }, [data]);
 
-    setFilmsIds(newFilmsIds);
-  }, [movies]);
+    React.useEffect(() => {
+      let newFilmsIds = movies.map((film) => film.id);
+      localStorage.setItem("filmsIds", JSON.stringify(newFilmsIds));
 
+      setFilmsIds(newFilmsIds);
+    }, [movies]);
+  }
   const deleteFilm = (id: number) => {
     removeFavMovies({
       variables: {

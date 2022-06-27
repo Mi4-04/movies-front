@@ -1,8 +1,8 @@
 import { IGenre } from "@app/utils/movies";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { Popularity } from "@app/Pages/AddPage/component/Filtration/component/Popularity";
-import { YearSelect } from "@app/Pages/AddPage/component/Filtration/component/YearSelect";
+import { Popularity } from "@app/containers/AddPage/component/Filtration/component/Popularity";
+import { YearSelect } from "@app/containers/AddPage/component/Filtration/component/YearSelect";
 import { GenreList } from "@app/components/GenreList";
 
 interface IFriltrationProps {

@@ -1,27 +1,16 @@
 import React from "react";
-import { Filtration } from "@app/Pages/AddPage/component/Filtration";
+import { Filtration } from "@app/containers/AddPage/component/Filtration";
 import { FilterLayout } from "./style";
 import { IGenre } from "@app/utils/movies";
 import { DEFAULT_VOTE_AVARAGE, DEFAULT_YEAR } from "@app/constant";
 import { MoviesList } from "./component/MoviesList";
 import { useTranslation } from "react-i18next";
 import { ButtonPad } from "@app/components/ButtonPad";
+import { MoviesContext } from "@app/utils/movies-context";
 
-interface IAddPageProps {
-  genres: IGenre[];
-  setGenres: (value: IGenre[]) => void;
-  blockView: boolean;
-  setBlockView: (value: boolean) => void;
-  genresId: number[];
-}
-
-export const AddPage = ({
-  genres,
-  setGenres,
-  blockView,
-  setBlockView,
-  genresId,
-}: IAddPageProps) => {
+const AddPage = () => {
+  const { genres, setGenres, blockView, setBlockView, genresId } =
+    React.useContext(MoviesContext);
   const { t } = useTranslation();
   const [year, setYear] = React.useState<number>(DEFAULT_YEAR);
   const [voteAverage, setVoteAverage] =
@@ -43,7 +32,6 @@ export const AddPage = ({
       </FilterLayout>
 
       <MoviesList
-       
         year={year}
         voteAverage={voteAverage}
         blockView={blockView}
@@ -52,3 +40,5 @@ export const AddPage = ({
     </div>
   );
 };
+
+export default AddPage;

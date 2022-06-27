@@ -9,6 +9,16 @@ export const HeaderMovies = styled.h1`
   ${tw` block   items-start ml-10`}
 `;
 
-export const LinkLayout = styled.div`
+export const LinkLayout = styled.button`
   ${tw`ml-2`}
+`;
+
+export const LogOutWrapper = styled.div`
+  display: flex;
+  justify-content: end;
+`;
+
+export const LogOutButton = styled.button`
+  margin-left: 10px;
+  text-decoration: underline;
 `;
