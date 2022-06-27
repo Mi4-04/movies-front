@@ -67,6 +67,8 @@ export const getMovieDetails = async (id: number): Promise<IMovies> => {
 };
 
 export const isValidFilmsIdAndFilms = (): void => {
-  !localStorage.getItem("filmsIds") &&
-    localStorage.setItem("filmsIds", JSON.stringify([]));
+  if (typeof window !== "undefined") {
+    !localStorage.getItem("filmsIds") &&
+      localStorage.setItem("filmsIds", JSON.stringify([]));
+  }
 };

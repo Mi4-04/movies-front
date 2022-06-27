@@ -1,14 +1,12 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { AuthContext } from "@app/utils/user";
+import { useRouter } from "next/router";
 
-export const PrivateRoute = ({ children, ...args }: any) => {
-  const { token } = React.useContext(AuthContext);
-
-  return (
-    <Route
-      {...args}
-      render={() => (token ? children : <Redirect to="/login" />)}
-    />
-  );
+export const PrivateRoute = ({ children }: { children: JSX.Element }) => {
+  const { replace, pathname } = useRouter();
+  if (typeof window !== "undefined" && pathname !== "/") {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      replace("/");
+    }
+  }
+  return children;
 };
